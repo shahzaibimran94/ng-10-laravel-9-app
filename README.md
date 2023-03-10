@@ -13,6 +13,12 @@ cd /backend
 4. php artisan db:seed
 5. php artisan serve
 
+I have implemented localization
+- Goto http://localhost:8000
+- Click French on top right
+This will change a text below laravel app logo to french and this can be changed to English by clicking on the same point.
+- To go to angular app you can click on top right on link that says (Angular App)
+
 Frontend Installation
 
 Angular 10 cli
