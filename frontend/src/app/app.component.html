@@ -1,0 +1,16 @@
+<!-- Toolbar -->
+<mat-toolbar color="primary" class="app-header">
+  <span class="nav-tool-items">
+    <ng-template [ngIf]="!loggedIn">
+      <a mat-button routerLink="/login" routerLinkActive="activebutton">Log in</a>
+      <a mat-button mat-raised-button routerLink="/register" routerLinkActive="activebutton">Register</a>
+    </ng-template>
+    <ng-template [ngIf]="loggedIn">
+      <a mat-button routerLinkActive="activebutton"><mat-icon>account_circle</mat-icon> {{ userName }}</a>
+      <a mat-button routerLink="/dashboard" routerLinkActive="activebutton">Dashboard</a>
+      <a mat-button mat-raised-button routerLink="/tasks" routerLinkActive="activebutton">Tasks</a>
+      <button mat-button mat-raised-button (click)="logout()">Logout</button>
+    </ng-template>
+  </span>
+</mat-toolbar>
+<router-outlet></router-outlet>

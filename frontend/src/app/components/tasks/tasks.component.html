@@ -1,0 +1,85 @@
+<div fxLayout fxLayoutAlign="center center" class="filter">
+  <mat-form-field fxFlex="40%">
+    <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="!task && !actions.create">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
+  </ng-container>
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef> Title </th>
+    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+  </ng-container>
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Description </th>
+    <td mat-cell *matCellDef="let element"> {{element.description.length > 20 ? (element.description | slice:0:20) + '...' : element.description}} </td>
+  </ng-container>
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef> Status </th>
+    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+  </ng-container>
+  <ng-container matColumnDef="priority">
+    <th mat-header-cell *matHeaderCellDef> Priority </th>
+    <td mat-cell *matCellDef="let element"> {{element.priority}} </td>
+  </ng-container>
+  <ng-container matColumnDef="deadline">
+    <th mat-header-cell *matHeaderCellDef> Deadline </th>
+    <td mat-cell *matCellDef="let element"> {{element.deadline}} </td>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let element"> 
+      <button mat-icon-button color="primary" aria-label="Edit" (click)="selectTask(element.id, false, true)">
+        <mat-icon>visibility</mat-icon>
+      </button>
+      <ng-template [ngIf]="element.enabled">
+        <button mat-icon-button color="primary" aria-label="Edit" (click)="selectTask(element.id, true)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" aria-label="Delete" (click)="deleteTask(element.id)">
+            <mat-icon>delete</mat-icon>
+        </button>
+      </ng-template>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-card *ngIf="actions.view && task" class="task_detail">
+  <div class="header">
+    <p>{{task?.title}}</p>
+    <button mat-icon-button color="primary" aria-label="Delete" (click)="task=null;action.view=false;">
+      Close
+     </button>
+  </div>
+  <mat-card-content>
+    <p><b>Description</b></p>
+    <p>{{ task?.description }}</p>
+    <p><b>Members ({{task.members.length}})</b></p>
+    <p>
+      <span *ngFor="let member of task.members;let i=index;">
+        {{ membersObj[member] }}{{ task.members.length > 1 && i < task.members.length-1 ? ' - ' : '' }}
+      </span>
+    </p>
+    <!-- <div class="comments-container">
+      <p><b>Comments</b></p>
+      <p>Test comment 1</p>
+      <p>Test comment 2</p>
+      <p>Test comment 3</p>
+    </div> -->
+  </mat-card-content>
+  <!-- {{ task | json }} -->
+</mat-card>
+
+<app-task-form 
+  *ngIf="actions.create || actions.edit" 
+  [task]="task"
+  [members]="members"
+  (closeEvent)="handleClose()"></app-task-form>
+
+<button *ngIf="!actions.create && !actions.edit" mat-button mat-raised-button color="primary" aria-label="Edit" class="create_task" (click)="actions.create=true;">
+  Create
+</button>

@@ -1,0 +1,42 @@
+table {
+    width: calc(100% - 40px);
+    margin: 0px 20px;
+}
+.filter {
+    margin: 75px 20px 0px 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+.create_task {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+.task_detail {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 350px;
+}
+.task_detail .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #cccc;
+    margin-bottom: 16px;
+}
+.header p {
+    margin: 0px; 
+    font-size: 14px;
+    font-weight: bold;
+}
+.comments-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    padding-bottom: 0;
+    border-radius: 4px;
+}
+.comments-container p:first-child{
+    border-bottom: 1px solid #ccc;
+}

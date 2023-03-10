@@ -1,0 +1,10 @@
+h1 {
+    top: 200px;
+}
+.dashboard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 15px;
+}
