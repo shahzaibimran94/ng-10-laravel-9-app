@@ -1,5 +1,9 @@
 # ng-10-laravel-9-app
 
+I have added env file for laravel project as it is not a good practice but to share database credentials I have shared the env file.
+If DB connection doesn't work then local database can be connected by passing db related credentails
+And then migrations and database seeding will work without any issue of the connection of database works.
+s
 Backend Installation
 
 Install Composer
